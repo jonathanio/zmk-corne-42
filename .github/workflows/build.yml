@@ -1,5 +1,24 @@
-on: [push, pull_request, workflow_dispatch]
+---
+name: ZMK Firmware Build
+
+permissions:
+  contents: read
+  issues: read
+  actions: read
+  pull-requests: read
+  packages: write
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+    # No specific configuration required
 
 jobs:
   build:
+    name: ZMK Firmware Build
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
