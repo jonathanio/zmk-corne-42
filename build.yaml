@@ -1,3 +1,10 @@
+---
+include:
+  - board: nice_nano_v2
+    shield: corne_left nice_view_adapter nice_view
+  - board: nice_nano_v2
+    shield: corne_right nice_view_adapter nice_view
+
 # This file generates the GitHub Actions matrix
 # For simple board + shield combinations, add them
 # to the top level board and shield arrays, for more
@@ -11,7 +18,3 @@
 #   - board: nice_nano_v2
 #     shield: reviung41
 #
----
-include:
-  - board: nice_nano_v2
-    shield: nice_view
