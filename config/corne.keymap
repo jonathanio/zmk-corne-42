@@ -7,11 +7,14 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/outputs.h>
 
 // Prepare the Layers
 #define BASE      0
 #define SYMBOLS   1
 #define NUMBERS   2
+#define MEDIA     3
+#define SYSTEM    4
 
 // TAP_DANCE settings
 #define TAP_SPEED 200
@@ -23,6 +26,7 @@
 
 / {
   behaviors {
+
     td_lctrl: tab_dance_left_ctrl {
       compatible = "zmk,behavior-tap-dance";
       label = "TAP_DANCE_LEFT_CTRL";
@@ -30,6 +34,7 @@
       tapping-term-ms = <TAP_SPEED>;
       bindings = <&mt LCTRL CAPSLOCK>, <&caps_word>;
     };
+
     td_lesc: tab_dance_left_esc {
       compatible = "zmk,behavior-tap-dance";
       label = "TAP_DANCE_LEFT_ESC";
@@ -43,6 +48,21 @@
       #binding-cells = <0>;
       tapping-term-ms = <TAP_SPEED>;
       bindings = <&mt RSHIFT ESC>, <&kp CAPSLOCK>;
+    };
+
+    td_llayer: tab_dance_left_layer {
+      compatible = "zmk,behavior-tap-dance";
+      label = "TAP_DANCE_LEFT_LAYER";
+      #binding-cells = <0>;
+      tapping-term-ms = <TAP_SPEED>;
+      bindings = <&mo NUMBERS &sl NUMBERS>, <&to SYSTEM>;
+    };
+    td_rlayer: tab_dance_right_layer {
+      compatible = "zmk,behavior-tap-dance";
+      label = "TAP_DANCE_RIGHT_LAYER";
+      #binding-cells = <0>;
+      tapping-term-ms = <TAP_SPEED>;
+      bindings = <&mo SYMBOLS &sl SYMBOLS>, <&to MEDIA>;
     };
   };
 
@@ -105,10 +125,10 @@
         &td_resc
 
         &kp LMETA
-        &mo 1
+        &td_llayer
         &kp SPACE
         &kp ENTER
-        &mo 2
+        &td_rlayer
         &kp RALT
 
       >;
@@ -116,10 +136,68 @@
 
     symbols_layer {
     // ------------------------------------------------------------------
+    // | ---      |---|---|---|---|---|  |---|---|---|---|---|      --- |
+    // | ---      |---|---|---|---|---|  |---|---|---|---|---|      --- |
+    // | ---      |---|---|---|---|---|  |---|---|---|---|---|      --- |
+    //             | META | LWR | SPC |  | ENT | RSE | ALT |
+    // ------------------------------------------------------------------
+      bindings = <
+
+        &none
+        &none
+        &none
+        &none
+        &none
+        &none
+        &none
+        &none
+        &none
+        &none
+        &none
+        &none
+
+        &none
+        &none
+        &none
+        &none
+        &none
+        &none
+        &none
+        &none
+        &none
+        &none
+        &none
+        &none
+
+        &none
+        &none
+        &none
+        &none
+        &none
+        &none
+        &none
+        &none
+        &none
+        &none
+        &none
+        &none
+
+        &trans
+        &trans
+        &trans
+        &trans
+        &trans
+        &trans
+
+      >;
+    };
+
+    numbers_layer {
+    // ------------------------------------------------------------------
     // | ---      |---|---|---|---|---|  |---| 1 | 2 | 3 | + |        - |
     // | ---      |---|---|---|---|---|  |---| 4 | 5 | 6 | * |        / |
-    // | ---      |---|---|---|---|---|  |---| 7 | 8 | 9 | 0 |    ENTER |
-    //             | META | LWR | SPC |  | ENT | RSE | ALT |
+    // | ---      |---|---|---|---|---|  |---| 7 | 8 | 9 | 0 |        = |
+    //             |      |     | SPC |  | ENT |     |  0  |
     // ------------------------------------------------------------------
       bindings = <
 
@@ -162,25 +240,52 @@
         &kp KP_N0
         &kp KP_EQUAL
 
+        &none
+        &none
         &trans
         &trans
         &trans
-        &trans
-        &trans
-        &trans
+        &kp KP_N0
 
       >;
     };
 
-    numbers_layer {
+    media_layer {
     // ------------------------------------------------------------------
-    // | ---      |---|---|---|---|---|  |---|---|---|---|---|      --- |
-    // | ---      |---|---|---|---|---|  |---|---|---|---|---|      --- |
-    // | ---      |---|---|---|---|---|  |---|---|---|---|---|      --- |
-    //             | META | LWR | SPC |  | ENT | RSE | ALT |
+    // | BRI_INC  |---|---|---|---|---|  |---|PRV|P/P|NXT|---|      VLU |
+    // | BRI_DEC  |---|---|---|---|---|  |---|---|STP|---|---|      VLD |
+    // | BRI_AUTO |---|---|---|---|---|  |---|---|---|RPT|SHF|      MUT |
+    //                    |---|---|---|  |---|BCK|---|
     // ------------------------------------------------------------------
       bindings = <
 
+        &kp C_BRIGHTNESS_INC
+        &none
+        &none
+        &none
+        &none
+        &none
+        &none
+        &kp C_PREVIOUS
+        &kp C_PLAY_PAUSE
+        &kp C_NEXT
+        &none
+        &kp C_VOLUME_UP
+
+        &kp C_BRIGHTNESS_DEC
+        &none
+        &none
+        &none
+        &none
+        &none
+        &none
+        &none
+        &kp C_STOP
+        &none
+        &none
+        &kp C_VOLUME_DOWN
+
+        &kp C_BRIGHTNESS_AUTO
         &none
         &none
         &none
@@ -189,46 +294,78 @@
         &none
         &none
         &none
-        &none
-        &none
-        &none
-        &none
+        &kp C_REPEAT
+        &kp C_SHUFFLE
+        &kp C_MUTE
 
         &none
         &none
         &none
         &none
+        &to MEDIA
         &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-
-        &trans
-        &trans
-        &trans
-        &trans
-        &trans
-        &trans
 
       >;
     };
+
+    system_layer {
+    // ------------------------------------------------------------------
+    // | OUT_BLE  |BT0|BT1|BT2|BT3|BT4|  |---|---|---|---|---|      --- |
+    // | OUT_USB  |BTP|---|---|---|BTN|  |---|---|---|---|---|      --- |
+    // | OUT_TOG  |---|---|BTC|---|---|  |---|---|---|---|---|      --- |
+    //                    |---|BCK|---|  |---|---|---|
+    // ------------------------------------------------------------------
+      bindings = <
+
+        &out OUT_BLE
+        &bt BT_SEL 0
+        &bt BT_SEL 1
+        &bt BT_SEL 2
+        &bt BT_SEL 3
+        &bt BT_SEL 4
+        &none
+        &none
+        &none
+        &none
+        &none
+        &none
+
+        &out OUT_USB
+        &bt BT_PRV
+        &none
+        &none
+        &none
+        &bt BT_NXT
+        &none
+        &none
+        &none
+        &none
+        &none
+        &none
+
+        &out OUT_TOG
+        &none
+        &none
+        &bt BT_CLR
+        &none
+        &none
+        &none
+        &none
+        &none
+        &none
+        &none
+        &none
+
+        &none
+        &to SYSTEM
+        &none
+        &none
+        &none
+        &none
+
+      >;
+    };
+
   };
 };
 
