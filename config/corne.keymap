@@ -23,19 +23,26 @@
 
 / {
   behaviors {
+    td_lctrl: tab_dance_left_ctrl {
+      compatible = "zmk,behavior-tap-dance";
+      label = "TAP_DANCE_LEFT_CTRL";
+      #binding-cells = <0>;
+      tapping-term-ms = <TAP_SPEED>;
+      bindings = <&mt LCTRL CAPSLOCK>, <&caps_word>;
+    };
     td_lesc: tab_dance_left_esc {
       compatible = "zmk,behavior-tap-dance";
       label = "TAP_DANCE_LEFT_ESC";
       #binding-cells = <0>;
       tapping-term-ms = <TAP_SPEED>;
-      bindings = <&mt LSHIFT ESC>, <&kp LCTRL>;
+      bindings = <&mt LSHIFT ESC>, <&kp CAPSLOCK>;
     };
     td_resc: tab_dance_right_esc {
       compatible = "zmk,behavior-tap-dance";
       label = "TAP_DANCE_RIGHT_ESC";
       #binding-cells = <0>;
       tapping-term-ms = <TAP_SPEED>;
-      bindings = <&mt RSHIFT ESC>, <&kp RCTRL>;
+      bindings = <&mt RSHIFT ESC>, <&kp CAPSLOCK>;
     };
   };
 
@@ -71,7 +78,7 @@
         &kp L
         &kp BSPC
 
-        &kp LCTRL
+        &td_lctrl
         &kp A
         &kp O
         &kp E
