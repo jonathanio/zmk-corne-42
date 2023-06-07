@@ -42,26 +42,16 @@
       bindings = <&mo>, <&sl>;
     };
 
-  };
-
-  combos {
-
-    compatible = "zmk,combos";
-
-    combo_esc {
-      timeout-ms = <125>;
-      key-positions = <40 32>; // Numbers + M
-      bindings = <&tog MEDIA>;
-    };
-
-    combo_esc {
-      timeout-ms = <125>;
-      key-positions = <40 23>; // Numbers + S
-      bindings = <&tog SYSTEM>;
+    tk: tog_kp {
+      compatible = "zmk,behavior-hold-tap";
+      label = "tog_kp";
+      #binding-cells = <2>;
+      flavor = "hold-preferred";
+      tapping-term-ms = <200>;
+      bindings = <&kp>, <&tog>;
     };
 
   };
-
 
     // -- Overall Keyboard Layout -------------------------------------
     // | 01 | 02 | 03 | 04 | 05 | 06 |  | 07 | 08 | 09 | 10 | 11 | 12 |
@@ -121,12 +111,12 @@
         &kp Z
         &mt RIGHT_SHIFT ESC
 
-        &kp LEFT_META
+        &tk LEFT_META SYSTEM
         &ms NUMBERS NUMBERS
         &kp SPACE
         &kp ENTER
         &ms SYMBOLS SYMBOLS
-        &kp RIGHT_ALT
+        &tk RIGHT_ALT MEDIA
 
       >;
     };
