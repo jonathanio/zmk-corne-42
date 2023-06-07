@@ -65,14 +65,14 @@
 
     default_layer {
     // ---------------------------------------------------------------------
-    // | TAB      |;: |,< |.> | P | Y |  | F | G | C | R | L |     BKSP |
-    // | CTRL     | A | O | E | U | I |  | D | H | T | N | S |      DEL |
-    // | LSFT:ESC |'" | Q | J | K | X |  | B | M | W | V | Z | RSFT:ESC |
+    // | ESC      |;: |,< |.> | P | Y |  | F | G | C | R | L |     BKSP |
+    // | LCTL:TAB | A | O | E | U | I |  | D | H | T | N | S |      DEL |
+    // | LSFT:CAP |'" | Q | J | K | X |  | B | M | W | V | Z | RSFT:ESC |
     //             | META | NUM | SPC |  | ENT | SYM | ALT |
     // ------------------------------------------------------------------
       bindings = <
 
-        &kp TAB
+        &kp ESC
         &kp SEMICOLON
         &kp COMMA
         &kp DOT
@@ -85,7 +85,7 @@
         &kp L
         &kp BACKSPACE
 
-        &mt LEFT_CONTROL CAPSLOCK
+        &mt LEFT_CONTROL TAB
         &kp A
         &kp O
         &kp E
@@ -98,7 +98,7 @@
         &kp S
         &kp DELETE
 
-        &mt LEFT_SHIFT ESC
+        &mt LEFT_SHIFT CAPSLOCK
         &kp SQT
         &kp Q
         &kp J
