@@ -34,15 +34,34 @@
   behaviors {
 
     ms: mo_sl {
-        compatible = "zmk,behavior-hold-tap";
-        label = "mo_sl";
-        #binding-cells = <2>;
-        flavor = "hold-preferred";
-        tapping-term-ms = <200>;
-        bindings = <&mo>, <&sl>;
+      compatible = "zmk,behavior-hold-tap";
+      label = "mo_sl";
+      #binding-cells = <2>;
+      flavor = "hold-preferred";
+      tapping-term-ms = <200>;
+      bindings = <&mo>, <&sl>;
     };
 
   };
+
+  combos {
+
+    compatible = "zmk,combos";
+
+    combo_esc {
+      timeout-ms = <125>;
+      key-positions = <40 32>; // Numbers + M
+      bindings = <&tog MEDIA>;
+    };
+
+    combo_esc {
+      timeout-ms = <125>;
+      key-positions = <40 23>; // Numbers + S
+      bindings = <&tog SYSTEM>;
+    };
+
+  };
+
 
     // -- Overall Keyboard Layout -------------------------------------
     // | 01 | 02 | 03 | 04 | 05 | 06 |  | 07 | 08 | 09 | 10 | 11 | 12 |
@@ -59,7 +78,7 @@
     // | TAB      |;: |,< |.> | P | Y |  | F | G | C | R | L |     BKSP |
     // | CTRL     | A | O | E | U | I |  | D | H | T | N | S |      DEL |
     // | LSFT:ESC |'" | Q | J | K | X |  | B | M | W | V | Z | RSFT:ESC |
-    //             | META | LWR | SPC |  | ENT | RSE | ALT |
+    //             | META | NUM | SPC |  | ENT | SYM | ALT |
     // ------------------------------------------------------------------
       bindings = <
 
@@ -161,10 +180,10 @@
         &none
 
         &trans
+        &none // Disable switching to the NUMBERS layer
         &trans
         &trans
-        &trans
-        &trans
+        &tog SYMBOLS
         &trans
 
       >;
@@ -172,10 +191,10 @@
 
     numbers_layer {
     // ------------------------------------------------------------------
-    // | ---      |---|---|---|---|---|  |---| 1 | 2 | 3 | + |        - |
+    // | ---      |---|---|---|---|---|  |NML| 1 | 2 | 3 | + |        - |
     // | ---      |---|---|---|---|---|  |---| 4 | 5 | 6 | * |        / |
     // | ---      |---|---|---|---|---|  |---| 7 | 8 | 9 | 0 |        = |
-    //             |      |     | NML |  | ENT |     |  0  |
+    //              |     | NUM |     |  | ENT | --- |    0  |
     // ------------------------------------------------------------------
       bindings = <
 
@@ -185,7 +204,7 @@
         &none
         &none
         &none
-        &none
+        &kp KP_NUMLOCK
         &kp KP_N1
         &kp KP_N2
         &kp KP_N3
@@ -218,11 +237,11 @@
         &kp KP_N0
         &kp KP_EQUAL
 
-        &none
-        &none
-        &kp KP_NUMLOCK
-        &kp KP_ENTER
         &trans
+        &tog NUMBERS
+        &trans
+        &kp KP_ENTER // Override for the keypad-specific Enter
+        &none // Disable switching to the SYMBOLS layer
         &kp KP_N0
 
       >;
@@ -233,7 +252,7 @@
     // | BRI_INC  |---|---|---|---|---|  |---|PRV|P/P|NXT|---|      VLU |
     // | BRI_DEC  |---|---|---|---|---|  |---|---|STP|---|---|      VLD |
     // | BRI_AUTO |---|---|---|---|---|  |---|---|---|RPT|SHF|      MUT |
-    //                    |---|---|---|  |---|BCK|---|
+    //              | --- | --- | --- |  | --- | TOG | --- |
     // ------------------------------------------------------------------
       bindings = <
 
@@ -277,10 +296,10 @@
         &kp C_MUTE
 
         &none
+        &none // Disable switching to NUMBERS layer
         &none
         &none
-        &none
-        &tog MEDIA
+        &tog MEDIA // Escape from the layer
         &none
 
       >;
@@ -291,7 +310,7 @@
     // | OUT_BLE  |BT0|BT1|BT2|BT3|BT4|  |---|---|---|---|---|      --- |
     // | OUT_USB  |BTP|---|---|---|BTN|  |---|---|---|---|---|      --- |
     // | OUT_TOG  |---|---|BTC|---|---|  |---|---|---|---|---|      --- |
-    //                    |---|BCK|---|  |---|---|---|
+    //              | --- | --- | --- |  | --- | TOG | --- |
     // ------------------------------------------------------------------
       bindings = <
 
@@ -335,10 +354,10 @@
         &none
 
         &none
-        &tog SYSTEM
+        &none // Disable switching to the NUMBERS layer
         &none
         &none
-        &none
+        &tog SYSTEM // Escape from the layer
         &none
 
       >;
@@ -353,7 +372,3 @@
 // |      |      |      |      |      |      | ---  |   ;  |   <  |   >  |   [  |   ]  |   +  |
 // |                    |      | NRML |      | ---  |      | NRML |      |                    |
 // --------------------------------------------------------------------------------------------
-// |      |      |      |      |      |      | ---  |      |   1  |   2  |   3  |   +  |   -  |
-// |      |      |      |      |      |      | ---  |      |   4  |   5  |   6  |   *  |   /  |
-// |      |      |      |      |      |      | ---  |      |   7  |   8  |   9  |   0  | ENTR |
-// |                    |      | NRML |      | ---  | ENTR | NRML |   0  |                    |
