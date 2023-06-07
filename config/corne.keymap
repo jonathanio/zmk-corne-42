@@ -25,6 +25,7 @@
 };
 
 / {
+
   behaviors {
 
     td_lctrl: tab_dance_left_ctrl {
@@ -55,14 +56,14 @@
       label = "TAP_DANCE_LEFT_LAYER";
       #binding-cells = <0>;
       tapping-term-ms = <TAP_SPEED>;
-      bindings = <&mt &mo NUMBERS &sl NUMBERS>, <&to SYSTEM>;
+      bindings = <&mt &mo NUMBERS &sl NUMBERS>, <&tog SYSTEM>;
     };
     td_rlayer: tab_dance_right_layer {
       compatible = "zmk,behavior-tap-dance";
       label = "TAP_DANCE_RIGHT_LAYER";
       #binding-cells = <0>;
       tapping-term-ms = <TAP_SPEED>;
-      bindings = <&mt &mo SYMBOLS &sl SYMBOLS>, <&to MEDIA>;
+      bindings = <&mt &mo SYMBOLS &sl SYMBOLS>, <&tog MEDIA>;
     };
   };
 
@@ -302,7 +303,7 @@
         &none
         &none
         &none
-        &to MEDIA
+        &tog MEDIA
         &none
 
       >;
@@ -357,7 +358,7 @@
         &none
 
         &none
-        &to SYSTEM
+        &tog SYSTEM
         &none
         &none
         &none
