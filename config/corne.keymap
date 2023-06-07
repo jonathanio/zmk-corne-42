@@ -33,7 +33,7 @@
 
   behaviors {
 
-    sm: momentary_stickey_layer {
+    ms: mo_sl {
         compatible = "zmk,behavior-hold-tap";
         label = "mo_sl";
         #binding-cells = <2>;
@@ -74,9 +74,9 @@
         &kp C
         &kp R
         &kp L
-        &kp BSPC
+        &kp BACKSPACE
 
-        &mt LCTRL CAPSLOCK
+        &mt LEFT_CONTROL CAPSLOCK
         &kp A
         &kp O
         &kp E
@@ -87,9 +87,9 @@
         &kp T
         &kp N
         &kp S
-        &kp DEL
+        &kp DELETE
 
-        &mt LSHIFT ESC
+        &mt LEFT_SHIFT ESC
         &kp SQT
         &kp Q
         &kp J
@@ -100,14 +100,14 @@
         &kp W
         &kp V
         &kp Z
-        &mt RSHIFT ESC
+        &mt RIGHT_SHIFT ESC
 
-        &kp LMETA
-        &sm NUMBERS NUMBERS
+        &kp LEFT_META
+        &ms NUMBERS NUMBERS
         &kp SPACE
         &kp ENTER
-        &sm SYMBOLS SYMBOLS
-        &kp RALT
+        &ms SYMBOLS SYMBOLS
+        &kp RIGHT_ALT
 
       >;
     };
