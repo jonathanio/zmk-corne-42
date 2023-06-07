@@ -239,10 +239,10 @@
 
     media_layer {
     // ------------------------------------------------------------------
-    // | BRI_INC  |---|---|---|---|---|  |---|PRV|PLA|NXT|---|      VLU |
+    // | BRI_INC  |---|---|---|---|---|  |---|PRV|P/P|NXT|---|      VLU |
     // | BRI_DEC  |---|---|---|---|---|  |---|---|STP|---|---|      VLD |
     // | BRI_AUTO |---|---|---|---|---|  |---|---|---|RPT|SHF|      MUT |
-    //              | --- | --- | --- |  | PAU | --- | TOG |
+    //              | --- | --- | --- |  | P/P | --- | TOG |
     // ------------------------------------------------------------------
       bindings = <
 
@@ -253,11 +253,11 @@
         &none
         &none
         &none
-        &kp C_PREVIOUS
-        &kp C_PLAY
-        &kp C_NEXT
+        &kp K_PREVIOUS
+        &kp K_PLAY_PAUSE
+        &kp K_NEXT
         &none
-        &kp C_VOLUME_UP
+        &kp K_VOLUME_UP
 
         &kp C_BRIGHTNESS_DEC
         &none
@@ -267,10 +267,10 @@
         &none
         &none
         &none
-        &kp C_STOP
+        &kp K_STOP2
         &none
         &none
-        &kp C_VOLUME_DOWN
+        &kp K_VOLUME_DOWN
 
         &kp C_BRIGHTNESS_AUTO
         &none
@@ -288,7 +288,7 @@
         &none
         &none // Disable switching to the NUMBERS layer
         &none
-        &kp C_PAUSE
+        &kp K_PLAY_PAUSE
         &none // Disable switching to the SYMBOLS layer
         &tog MEDIA // Escape from the layer
 
