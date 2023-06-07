@@ -51,20 +51,6 @@
       bindings = <&mt RSHIFT ESC>, <&kp CAPSLOCK>;
     };
 
-    td_llayer: tab_dance_left_layer {
-      compatible = "zmk,behavior-tap-dance";
-      label = "TAP_DANCE_LEFT_LAYER";
-      #binding-cells = <0>;
-      tapping-term-ms = <TAP_SPEED>;
-      bindings = <&mt <&mo NUMBERS> <&sl NUMBERS>>, <&tog SYSTEM>;
-    };
-    td_rlayer: tab_dance_right_layer {
-      compatible = "zmk,behavior-tap-dance";
-      label = "TAP_DANCE_RIGHT_LAYER";
-      #binding-cells = <0>;
-      tapping-term-ms = <TAP_SPEED>;
-      bindings = <&mt <&mo SYMBOLS> <&sl SYMBOLS>>, <&tog MEDIA>;
-    };
   };
 
     // -- Overall Keyboard Layout -------------------------------------
@@ -126,10 +112,10 @@
         &td_resc
 
         &kp LMETA
-        &td_llayer
+        &mt &mo NUMBERS &sl NUMBERS
         &kp SPACE
         &kp ENTER
-        &td_rlayer
+        &mt &mo SYMBOLS &sl SYMBOLS
         &kp RALT
 
       >;
