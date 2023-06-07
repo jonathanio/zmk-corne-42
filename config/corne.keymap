@@ -89,7 +89,7 @@
         &kp S
         &kp DEL
 
-        &sm LSHIFT ESC
+        &mt LSHIFT ESC
         &kp SQT
         &kp Q
         &kp J
@@ -100,13 +100,13 @@
         &kp W
         &kp V
         &kp Z
-        &sm RSHIFT ESC
+        &mt RSHIFT ESC
 
         &kp LMETA
-        &mt &mo NUMBERS &sl NUMBERS
+        &sm NUMBERS NUMBERS
         &kp SPACE
         &kp ENTER
-        &mt &mo SYMBOLS &sl SYMBOLS
+        &sm SYMBOLS SYMBOLS
         &kp RALT
 
       >;
