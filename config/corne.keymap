@@ -24,31 +24,22 @@
     quick-release;
 };
 
+&mt {
+  tapping-term-ms = <400>;
+  retro-tap;
+};
+
 / {
 
   behaviors {
 
-    td_lctrl: tab_dance_left_ctrl {
-      compatible = "zmk,behavior-tap-dance";
-      label = "TAP_DANCE_LEFT_CTRL";
-      #binding-cells = <0>;
-      tapping-term-ms = <TAP_SPEED>;
-      bindings = <&mt LCTRL CAPSLOCK>, <&caps_word>;
-    };
-
-    td_lesc: tab_dance_left_esc {
-      compatible = "zmk,behavior-tap-dance";
-      label = "TAP_DANCE_LEFT_ESC";
-      #binding-cells = <0>;
-      tapping-term-ms = <TAP_SPEED>;
-      bindings = <&mt LSHIFT ESC>, <&kp CAPSLOCK>;
-    };
-    td_resc: tab_dance_right_esc {
-      compatible = "zmk,behavior-tap-dance";
-      label = "TAP_DANCE_RIGHT_ESC";
-      #binding-cells = <0>;
-      tapping-term-ms = <TAP_SPEED>;
-      bindings = <&mt RSHIFT ESC>, <&kp CAPSLOCK>;
+    sm: momentary_stickey_layer {
+        compatible = "zmk,behavior-hold-tap";
+        label = "mo_sl";
+        #binding-cells = <2>;
+        flavor = "hold-preferred";
+        tapping-term-ms = <200>;
+        bindings = <&mo>, <&sl>;
     };
 
   };
@@ -85,7 +76,7 @@
         &kp L
         &kp BSPC
 
-        &td_lctrl
+        &mt LCTRL CAPSLOCK
         &kp A
         &kp O
         &kp E
@@ -98,7 +89,7 @@
         &kp S
         &kp DEL
 
-        &td_lesc
+        &sm LSHIFT ESC
         &kp SQT
         &kp Q
         &kp J
@@ -109,7 +100,7 @@
         &kp W
         &kp V
         &kp Z
-        &td_resc
+        &sm RSHIFT ESC
 
         &kp LMETA
         &mt &mo NUMBERS &sl NUMBERS
