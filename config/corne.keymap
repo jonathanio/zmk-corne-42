@@ -242,7 +242,7 @@
     // | BRI_INC  |---|---|---|---|---|  |---|PRV|P/P|NXT|---|      VLU |
     // | BRI_DEC  |---|---|---|---|---|  |---|---|STP|---|---|      VLD |
     // | BRI_AUTO |---|---|---|---|---|  |---|---|---|RPT|SHF|      MUT |
-    //              | --- | --- | --- |  | --- | TOG | --- |
+    //              | --- | --- | --- |  | --- | --- | TOG |
     // ------------------------------------------------------------------
       bindings = <
 
@@ -286,11 +286,11 @@
         &kp C_MUTE
 
         &none
-        &none // Disable switching to NUMBERS layer
+        &none // Disable switching to the NUMBERS layer
         &none
         &none
+        &none // Disable switching to the SYMBOLS layer
         &tog MEDIA // Escape from the layer
-        &none
 
       >;
     };
@@ -300,7 +300,7 @@
     // | OUT_BLE  |BT0|BT1|BT2|BT3|BT4|  |---|---|---|---|---|      --- |
     // | OUT_USB  |BTP|---|---|---|BTN|  |---|---|---|---|---|      --- |
     // | OUT_TOG  |---|---|BTC|---|---|  |---|---|---|---|---|      --- |
-    //              | --- | --- | --- |  | --- | TOG | --- |
+    //              | TOG | --- | --- |  | --- | --- | --- |
     // ------------------------------------------------------------------
       bindings = <
 
@@ -343,11 +343,11 @@
         &none
         &none
 
-        &none
+        &tog SYSTEM // Escape from the layer
         &none // Disable switching to the NUMBERS layer
         &none
         &none
-        &tog SYSTEM // Escape from the layer
+        &none // Disable switching to the SYMBOLS layer
         &none
 
       >;
