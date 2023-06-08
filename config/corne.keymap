@@ -98,7 +98,7 @@
         &kp S
         &kp DELETE
 
-        &mt LEFT_SHIFT CAPSLOCK
+        &kp LEFT_SHIFT
         &kp SQT
         &kp Q
         &kp J
@@ -109,7 +109,7 @@
         &kp W
         &kp V
         &kp Z
-        &mt RIGHT_SHIFT ESC
+        &kp CAPSLOCK
 
         &tk LEFT_META SYSTEM
         &ms NUMBERS NUMBERS
