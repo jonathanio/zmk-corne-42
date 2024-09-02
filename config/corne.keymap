@@ -29,336 +29,133 @@
   retro-tap;
 };
 
+&soft_off {
+    hold-time-ms = <2000>;
+};
+
 / {
 
   behaviors {
 
-    ms: mo_sl {
+    ms: mod_sticky {
       compatible = "zmk,behavior-hold-tap";
-      label = "mo_sl";
       #binding-cells = <2>;
       flavor = "hold-preferred";
       tapping-term-ms = <200>;
       bindings = <&mo>, <&sl>;
     };
 
-    tk: tog_kp {
+    kpt: kp_toggle {
       compatible = "zmk,behavior-hold-tap";
-      label = "tog_kp";
       #binding-cells = <2>;
       flavor = "hold-preferred";
       tapping-term-ms = <200>;
       bindings = <&kp>, <&tog>;
     };
-
   };
 
-    // -- Overall Keyboard Layout -------------------------------------
-    // | 01 | 02 | 03 | 04 | 05 | 06 |  | 07 | 08 | 09 | 10 | 11 | 12 |
-    // | 13 | 14 | 15 | 16 | 17 | 18 |  | 19 | 20 | 21 | 22 | 23 | 24 |
-    // | 25 | 26 | 27 | 28 | 29 | 30 |  | 31 | 32 | 33 | 34 | 35 | 36 |
-    // |              | 37 | 38 | 39 |  | 40 | 41 | 42 |              |
-    // ----------------------------------------------------------------
+  combos {
+    compatible = "zmk,combos";
+
+    // Power off the left-hand keyboard
+    left_soft_off {
+      timeout-ms = <100>;
+      layers = <0>; // limit to the BASE layer
+      key-positions = <37 38 39>;
+      bindings = <&soft_off>;
+    };
+
+    // Power off the right-hand keyboard
+    right_soft_off {
+      timeout-ms = <100>;
+      layers = <0>; // limit to the BASE layer
+      key-positions = <40 41 42>;
+      bindings = <&soft_off>;
+    };
+  };
 
   keymap {
     compatible = "zmk,keymap";
 
+    // ╭────┬────┬────┬────┬────┬────╮ ╭────┬────┬────┬────┬────┬────╮
+    // │ 01 │ 02 │ 03 │ 04 │ 05 │ 06 │ │ 07 │ 08 │ 09 │ 10 │ 11 │ 12 │
+    // ├────┼────┼────┼────┼────┼────┤ ├────┼────┼────┼────┼────┼────┤
+    // │ 13 │ 14 │ 15 │ 16 │ 17 │ 18 │ │ 19 │ 20 │ 21 │ 22 │ 23 │ 24 │
+    // ├────┼────┼────┼────┼────┼────┤ ├────┼────┼────┼────┼────┼────┤
+    // │ 25 │ 26 │ 27 │ 28 │ 29 │ 30 │ │ 31 │ 32 │ 33 │ 34 │ 35 │ 36 │
+    // ╰────┴────┴────┼────┼────┼────┤ ├────┼────┼────┼────┴────┴────╯
+    //                │ 37 │ 38 │ 39 │ │ 40 │ 41 │ 42 │
+    //                ╰────┴────┴────╯ ╰────┴────┴────╯
+
     default_layer {
-    // ---------------------------------------------------------------------
-    // | ESC      |;: |,< |.> | P | Y |  | F | G | C | R | L |     BKSP |
-    // | LCTL:TAB | A | O | E | U | I |  | D | H | T | N | S |      DEL |
-    // | LSFT:CAP |'" | Q | J | K | X |  | B | M | W | V | Z | RSFT:ESC |
-    //             | META | NUM | SPC |  | ENT | SYM | ALT |
-    // ------------------------------------------------------------------
       bindings = <
-
-        &kp ESC
-        &kp SEMICOLON
-        &kp COMMA
-        &kp DOT
-        &kp P
-        &kp Y
-        &kp F
-        &kp G
-        &kp C
-        &kp R
-        &kp L
-        &kp BACKSPACE
-
-        &mt LEFT_CONTROL TAB
-        &kp A
-        &kp O
-        &kp E
-        &kp U
-        &kp I
-        &kp D
-        &kp H
-        &kp T
-        &kp N
-        &kp S
-        &kp DELETE
-
-        &kp LEFT_SHIFT
-        &kp SQT
-        &kp Q
-        &kp J
-        &kp K
-        &kp X
-        &kp B
-        &kp M
-        &kp W
-        &kp V
-        &kp Z
-        &kp CAPSLOCK
-
-        &tk LEFT_META SYSTEM
-        &ms NUMBERS NUMBERS
-        &kp SPACE
-        &kp ENTER
-        &ms SYMBOLS SYMBOLS
-        &tk RIGHT_ALT MEDIA
-
+        // ╭─────────────────────────┬───────┬───────┬───────┬───────┬───────╮ ╭───────┬───────┬───────────┬────────────┬───────────────┬──────────────────╮
+             &lt MEDIA TAB             &kp Q   &kp W   &kp E   &kp R   &kp T     &kp Y   &kp U   &kp I       &kp O        &kp P           &kp BACKSPACE
+        // ├─────────────────────────┼───────┼───────┼───────┼───────┼───────┤ ├───────┼───────┼───────────┼────────────┼───────────────┼──────────────────┤
+             &mt LEFT_CONTROL ESCAPE   &kp A   &kp S   &kp D   &kp F   &kp G     &kp H   &kp J   &kp K       &kp L        &kp SEMICOLON   &kp SINGLE_QUOTE
+        // ├─────────────────────────┼───────┼───────┼───────┼───────┼───────┤ ├───────┼───────┼───────────┼────────────┼───────────────┼──────────────────┤
+             &mt LEFT_SHIFT CAPSLOCK   &kp Z   &kp X   &kp C   &kp V   &kp B     &kp N   &kp M   &kp COMMA   &kp PERIOD   &kp SLASH       &kp RIGHT_SHIFT
+        // ╰───────┬─────────────────┴─────┬──┴───────┴──────┴───┬───┴───────┤ ├───────┴───┬───┴───────────┴─────┬──────┴──────────────┬┴──────────────────╯
+                     &kpt LEFT_META SYSTEM   &ms NUMBERS NUMBERS   &kp SPACE     &kp ENTER   &ms SYMBOLS SYMBOLS   &kpt LEFT_ALT MEDIA
+        //         ╰───────────────────────┴─────────────────────┴───────────╯ ╰───────────┴─────────────────────┴─────────────────────╯
       >;
     };
 
-    symbols_layer {
-    // ------------------------------------------------------------------
-    // | ---      |---|---|---|---|---|  |---|---|---|---|---|      --- |
-    // | ---      |---|---|---|---|---|  |---|---|---|---|---|      --- |
-    // | ---      |---|---|---|---|---|  |---|---|---|---|---|      --- |
-    //             | META | LWR | SPC |  | ENT | RSE | ALT |
-    // ------------------------------------------------------------------
+    symbols_layer { // right modifier
       bindings = <
-
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-
-        &trans
-        &none // Disable switching to the NUMBERS layer
-        &trans
-        &trans
-        &tog SYMBOLS
-        &trans
-
+        // ╭───────────────────────────┬──────────────────────┬─────────────┬─────────────────┬────────────┬─────────────╮ ╭────────────────┬───────────────┬──────────────┬──────────────────────┬───────────────────────┬───────────╮
+             &kp TAB                     &kp EXCLAMATION        &kp AT_SIGN   &kp HASH          &kp DOLLAR   &kp PERCENT     &kp CARET        &kp AMPERSAND   &kp ASTERISK   &kp LEFT_PARENTHESIS   &kp RIGHT_PARENTHESIS   &trans
+        // ├───────────────────────────┼──────────────────────┼─────────────┼─────────────────┼────────────┼─────────────┤ ├────────────────┼───────────────┼──────────────┼──────────────────────┼───────────────────────┼───────────┤
+             &mt LEFT_CONTROL &to BASE   &kp PIPE               &none         &kp NON_US_HASH   &none        &none           &kp MINUS        &kp PLUS        &kp TILDE      &kp LEFT_BRACE         &kp RIGHT_BRACE         &kp GRAVE
+        // ├───────────────────────────┼──────────────────────┼─────────────┼─────────────────┼────────────┼─────────────┤ ├────────────────┼───────────────┼──────────────┼──────────────────────┼───────────────────────┼───────────┤
+             &kp LEFT_SHIFT              &kp NON_US_BACKSLASH   &none         &none             &none        &none           &kp UNDERSCORE   &kp EQUAL       &none          &kp LEFT_BRACKET       &kp RIGHT_BRACKET       &trans
+        // ╰───────────────────────────┴──────────────────────┴─────────────┴────────┬────────┴──────┬─────┴────┬────────┤ ├────────┬───────┴──┬────────────┴─┬────────────┴──────────────────────┴───────────────────────┴───────────╯
+                                                                                       &kp LEFT_META   &to BASE   &trans     &trans   &to BASE   &kp LEFT_ALT
+        //                                                                           ╰───────────────┴──────────┴────────╯ ╰────────┴──────────┴──────────────╯
       >;
     };
 
     numbers_layer {
-    // ------------------------------------------------------------------
-    // | ---      |---|---|---|---|---|  |NML| 1 | 2 | 3 | + |        - |
-    // | ---      |---|---|---|---|---|  |---| 4 | 5 | 6 | * |        / |
-    // | ---      |---|---|---|---|---|  |---| 7 | 8 | 9 | 0 |        = |
-    //              |     | NUM |     |  | ENT | --- |    0  |
-    // ------------------------------------------------------------------
       bindings = <
-
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &kp KP_NUMLOCK
-        &kp KP_N1
-        &kp KP_N2
-        &kp KP_N3
-        &kp KP_PLUS
-        &kp KP_MINUS
-
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &kp KP_N4
-        &kp KP_N5
-        &kp KP_N6
-        &kp KP_MULTIPLY
-        &kp KP_DIVIDE
-
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &kp KP_N7
-        &kp KP_N8
-        &kp KP_N9
-        &kp KP_N0
-        &kp KP_EQUAL
-
-        &trans
-        &tog NUMBERS
-        &trans
-        &kp KP_ENTER // Override for the keypad-specific Enter
-        &none // Disable switching to the SYMBOLS layer
-        &kp KP_N0
+        // ╭───────────────────────────┬────────┬────────┬────────┬────────┬────────╮ ╭──────────┬───────────────┬─────────────┬───────────┬────────┬────────╮
+             &kp TAB                     &kp N1   &kp N2   &kp N3   &kp N4   &kp N5     &kp N6     &kp N7          &kp N8        &kp N9      &kp N0   &trans
+        // ├───────────────────────────┼────────┼────────┼────────┼────────┼────────┤ ├──────────┼───────────────┼─────────────┼───────────┼────────┼────────┤
+             &mt LEFT_CONTROL &to BASE   &none    &none    &none    &none    &none      &kp LEFT   &kp DOWN        &kp UP        &kp RIGHT   &none    &none
+        // ├───────────────────────────┼────────┼────────┼────────┼────────┼────────┤ ├──────────┼───────────────┼─────────────┼───────────┼────────┼────────┤
+             &kp LEFT_SHIFT              &none    &none    &none    &none    &none      &none      &kp PAGE_DOWN   &kp PAGE_UP   &none       &none    &trans
+        // ╰───────────────────────────┴────────┼────────┴──────┬─┴────────┼────────┤ ├────────┬──┴───────┬──────┴───────┬─────┴───────────┴────────┴────────╯
+                                                  &kp LEFT_META   &to BASE   &trans     &trans   &to BASE   &kp LEFT_ALT
+        //                                      ╰───────────────┴──────────┴────────╯ ╰────────┴──────────┴──────────────╯
 
       >;
     };
 
     media_layer {
-    // ------------------------------------------------------------------
-    // | BRI_INC  |---|---|---|---|---|  |---|PRV|P/P|NXT|---|      VLU |
-    // | BRI_DEC  |---|---|---|---|---|  |---|---|STP|---|---|      VLD |
-    // | BRI_AUTO |---|---|---|---|---|  |---|---|---|RPT|SHF|      MUT |
-    //              | --- | --- | --- |  | P/P | --- | TOG |
-    // ------------------------------------------------------------------
       bindings = <
-
-        &kp C_BRIGHTNESS_INC
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &kp K_PREVIOUS
-        &kp C_PLAY_PAUSE
-        &kp K_NEXT
-        &none
-        &kp K_VOLUME_UP
-
-        &kp C_BRIGHTNESS_DEC
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &kp K_STOP2
-        &none
-        &none
-        &kp K_VOLUME_DOWN
-
-        &kp C_BRIGHTNESS_AUTO
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &kp C_REPEAT
-        &kp C_SHUFFLE
-        &kp C_MUTE
-
-        &none
-        &none // Disable switching to the NUMBERS layer
-        &none
-        &kp C_PLAY
-        &none // Disable switching to the SYMBOLS layer
-        &tog MEDIA // Escape from the layer
-
+        // ╭────────────────┬───────┬─────────────────┬───────┬───────┬───────────────────────╮ ╭──────────────┬────────────────┬────────────┬───────────────┬──────────────────┬───────────────────╮
+             &none            &none   &none             &none   &none   &kp C_BRIGHTNESS_INC      &none          &none            &none        &kp C_STOP      &kp C_PLAY_PAUSE   &kp C_VOLUME_UP
+        // ├────────────────┼───────┼─────────────────┼───────┼───────┼───────────────────────┤ ├──────────────┼────────────────┼────────────┼───────────────┼──────────────────┼───────────────────┤
+             &to BASE         &none   &kp PRINTSCREEN   &none   &none   &kp C_BRIGHTNESS_DEC      &none          &none            &none        &none           &none              &kp C_VOLUME_DOWN
+        // ├────────────────┼───────┼─────────────────┼───────┼───────┼───────────────────────┤ ├──────────────┼────────────────┼────────────┼───────────────┼──────────────────┼───────────────────┤
+             &kp LEFT_SHIFT   &none   &none             &none   &none   &kp C_BRIGHTNESS_AUTO     &kp C_REPEAT   &kp C_PREVIOUS   &kp C_NEXT   &kp C_SHUFFLE   &kp C_MUTE         &trans
+        // ├────────────────┴───────┴─────────────────┴───┬───┴───────┴───┬──────────┬────────┤ ├────────┬─────┴────┬───────────┴──┬─────────┴───────────────┴──────────────────┴───────────────────╯
+                                                            &kp LEFT_META   &to BASE   &trans     &trans   &to BASE   &kp LEFT_ALT
+        //                                                ╰───────────────┴──────────┴────────╯ ╰────────┴──────────┴──────────────╯
       >;
     };
 
     system_layer {
-    // ------------------------------------------------------------------
-    // | OUT_BLE  |BT0|BT1|BT2|BT3|BT4|  |---|---|---|---|---|      --- |
-    // | OUT_USB  |BTP|---|---|---|BTN|  |---|---|---|---|---|      --- |
-    // | OUT_TOG  |---|---|BTC|---|---|  |---|---|---|---|---|      --- |
-    //              | TOG | --- | --- |  | --- | --- | --- |
-    // ------------------------------------------------------------------
       bindings = <
-
-        &out OUT_BLE
-        &bt BT_SEL 0
-        &bt BT_SEL 1
-        &bt BT_SEL 2
-        &bt BT_SEL 3
-        &bt BT_SEL 4
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-
-        &out OUT_USB
-        &bt BT_PRV
-        &none
-        &none
-        &none
-        &bt BT_NXT
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-
-        &out OUT_TOG
-        &none
-        &none
-        &bt BT_CLR
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-        &none
-
-        &tog SYSTEM // Escape from the layer
-        &none // Disable switching to the NUMBERS layer
-        &none
-        &none
-        &none // Disable switching to the SYMBOLS layer
-        &none
-
+        // ╭──────────┬───────┬─────────────┬───────┬───────┬───────┬───────╮ ╭──────────────┬──────────────┬───────────────┬──────────────┬──────────────┬────────────╮
+             &none      &none                 &none   &none   &none   &none     &bt BT_SEL 0   &bt BT_SEL 1   &bt BT_SEL 2    &bt BT_SEL 3   &bt BT_SEL 4   &bt BT_CLR
+        // ├──────────┼───────┼─────────────┼───────┼───────┼───────┼───────┤ ├──────────────┼──────────────┼───────────────┼──────────────┼──────────────┼────────────┤
+             &to BASE   &none   &kp C_SLEEP   &none   &none   &none   &none     &none          &none          &kp C_AL_LOCK   &none          &none          &none
+        // ├──────────┼───────┼─────────────┼───────┼───────┼───────┼───────┤ ├──────────────┼──────────────┼───────────────┼──────────────┼──────────────┼────────────┤
+             &none      &none                 &none   &none   &none   &none     &none          &none          &none           &kp BT_PRV     &kp BT_NXT     &none
+        // ╰──────────┴───────┴───────────┬─┴─────┬─┴───────┴┬──────┴───────┤ ├──────────────┼──────────┬───┴──────────┬────┴──────────────┴──────────────┴────────────╯
+                                            &none   &to BASE   &out OUT_BLE     &out OUT_USB   &to BASE   &out OUT_TOG
+        //                                ╰───────┴──────────┴──────────────╯ ╰──────────────┴──────────┴──────────────╯
       >;
     };
-
   };
 };
-
-// --------------------------------------------------------------------------------------------
-// |      |      |   £  |      |      |   ^  | ---  |   !  |   @  |   $  |   &  |   *  | NONE |
-// |      |      |      |      |      |      | ---  |   ~  |   (  |   )  |   {  |   }  |   `  |
-// |      |      |      |      |      |      | ---  |   ;  |   <  |   >  |   [  |   ]  |   +  |
-// |                    |      | NRML |      | ---  |      | NRML |      |                    |
-// --------------------------------------------------------------------------------------------
