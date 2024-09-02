@@ -1,0 +1,27 @@
+---
+name: ZMK Simple Firmware Build
+
+permissions:
+  contents: read
+  issues: read
+  actions: read
+  pull-requests: read
+  packages: write
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+    # No specific configuration required
+
+jobs:
+  simple:
+    name: Simple Firmware
+    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+    with:
+      config_path: simple
+      archive_name: simple

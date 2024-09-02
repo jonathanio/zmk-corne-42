@@ -1,5 +1,5 @@
 ---
-name: ZMK Firmware Build
+name: ZMK Full Firmware Build
 
 permissions:
   contents: read
@@ -20,5 +20,8 @@ on:
 
 jobs:
   build:
-    name: ZMK Firmware Build
+    name: Full Firmware
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+    with:
+      config_path: full
+      archive_name: full
