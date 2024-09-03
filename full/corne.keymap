@@ -20,8 +20,8 @@
 #define TAP_SPEED 200
 
 &sk {
-    release-after-ms = <2000>;
-    quick-release;
+  release-after-ms = <2000>;
+  quick-release;
 };
 
 &mt {
