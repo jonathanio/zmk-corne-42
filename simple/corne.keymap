@@ -7,7 +7,14 @@
     squote: single_double_quote {
       compatible = "zmk,behavior-mod-morph";
       #binding-cells = <0>;
-      bindings = <&kp SINGLE_QUOTE>, <&kp DOUBLE_QUOTE>;
+      bindings = <&kp SINGLE_QUOTE>, <&kp DOUBLE_QUOTES>;
+      mods = <(MOD_LSFT|MOD_RSFT)>;
+    };
+
+     backspace: backspace_delete {
+      compatible = "zmk,behavior-mod-morph";
+      #binding-cells = <0>;
+      bindings = <&kp BACKSPACE>, <&kp DELETE>;
       mods = <(MOD_LSFT|MOD_RSFT)>;
     };
   };
