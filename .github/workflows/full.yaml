@@ -12,9 +12,19 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "full/**"
+      - "boards/**"
+      - "zephyr/**"
+      - "build.yaml"
   pull_request:
     branches:
       - main
+    paths:
+      - "full/**"
+      - "boards/**"
+      - "zephyr/**"
+      - "build.yaml"
   workflow_dispatch:
     # No specific configuration required
 
