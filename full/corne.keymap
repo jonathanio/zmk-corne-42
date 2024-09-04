@@ -10,11 +10,12 @@
 #include <dt-bindings/zmk/outputs.h>
 
 // Prepare the Layers
-#define BASE      0
-#define SYMBOLS   1
-#define NUMBERS   2
-#define MEDIA     3
-#define SYSTEM    4
+#define BASE 0
+#define SYMBOLS 1
+#define NUMBERS 2
+#define MEDIA 3
+#define SYSTEM 4
+#define MOVE 5
 
 // TAP_DANCE settings
 #define TAP_SPEED 200
@@ -109,9 +110,9 @@
              &mt LEFT_CONTROL ESCAPE   &kp A   &kp S   &kp D   &kp F   &kp G     &kp H   &kp J   &kp K       &kp L        &kp SEMICOLON   &squote
         // ├─────────────────────────┼───────┼───────┼───────┼───────┼───────┤ ├───────┼───────┼───────────┼────────────┼───────────────┼──────────────────┤
              &mt LEFT_SHIFT CAPSLOCK   &kp Z   &kp X   &kp C   &kp V   &kp B     &kp N   &kp M   &kp COMMA   &kp PERIOD   &kp SLASH       &kp RIGHT_SHIFT
-        // ╰───────┬─────────────────┴─────┬──┴───────┴──────┴───┬───┴───────┤ ├───────┴───┬───┴───────────┴─────┬──────┴──────────────┬┴──────────────────╯
-                     &kpt LEFT_META SYSTEM   &ms NUMBERS NUMBERS   &kp SPACE     &kp ENTER   &ms SYMBOLS SYMBOLS   &kpt LEFT_ALT MEDIA
-        //         ╰───────────────────────┴─────────────────────┴───────────╯ ╰───────────┴─────────────────────┴─────────────────────╯
+        // ╰───────┬─────────────────┴─────┬──┴───────┴──────┴───┬───┴───────┤ ├───────┴───────┴┬───────────┴─────────┬─┴───────────────┴───┬──────────────╯
+                     &kpt LEFT_META SYSTEM   &ms NUMBERS NUMBERS   &kp SPACE     &lt MOVE ENTER   &ms SYMBOLS SYMBOLS   &kpt LEFT_ALT MEDIA
+        //         ╰───────────────────────┴─────────────────────┴───────────╯ ╰────────────────┴─────────────────────┴─────────────────────╯
       >;
     };
 
@@ -173,6 +174,21 @@
         // ╰────────────┴─────────────────┴─────────────────┴──────────────┴──────┬───────┴──────────────┤ ├───────┼───────┼───────┬──────┴──────────────┴───────┴───────╯
                                                                          &to BASE   &none   &out OUT_TOG     &none   &none   &none
         //                                                             ╰──────────┴───────┴──────────────╯ ╰───────┴───────┴───────╯
+      >;
+    };
+
+    move_layer {
+      label = "move";
+      bindings = <
+        // ╭───────┬───────┬───────┬───────┬───────┬───────╮ ╭───────────────┬──────────┬──────────┬───────────┬───────┬───────╮
+             &none   &none   &none   &none   &none   &none     &kp PAGE_UP     &kp HOME   &kp UP     &kp END     &none   &none
+        // ├───────┼───────┼───────┼───────┼───────┼───────┤ ├───────────────┼──────────┼──────────┼───────────┼───────┼───────┤
+             &none   &none   none    &none   &none   &none     &kp PAGE_DOWN   &kp LEFT   &kp DOWN   &kp RIGHT   &none   &none
+        // ├───────┼───────┼───────┼──────────────┼────────┤ ├───────────────┼──────────┼──────────┼───────────┼───────┼───────┤
+             &none   &none   &none   &none   &none   &none     &none           &none      &none      &none       &none   &none
+        // ╰───────┴───────┴───────┼───────┼───────┼───────┤ ├───────┬───────┼───────┬──┴──────────┴───────────┴───────┴───────╯
+                                     &none   &none   &none     &none   &none   &none
+        //                         ╰───────┴───────┴───────╯ ╰───────┴───────┴───────╯
       >;
     };
   };
